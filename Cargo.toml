@@ -7,7 +7,7 @@ description = "A functional and extensible library for organized lazy processing
 readme = "README.md"
 repository = "https://github.com/AngleSideAngle/data-pipeline"
 license = "MIT"
-keywords = ["data", "filtering", "streams", "lazy", "tree", "logging"]
+keywords = ["filtering", "streams", "lazy", "tree", "logging"]
 categories = ["mathematics", "data-structures", "algorithms", "science", "science::robotics"]
 
 [dependencies]
