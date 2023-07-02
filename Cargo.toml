@@ -1,13 +1,13 @@
 [package]
-name = "pipeline"
+name = "data-pipeline"
 version = "0.1.0"
 authors = ["Asa Paparo <asapaparo@gmail.com>"]
 edition = "2021"
-description = "A functional and extensible library for organized processing of data with minimal overhead"
+description = "A functional and extensible library for organized lazy processing of data with minimal overhead"
 readme = "README.md"
-repository = "https://github.com/AngleSideAngle/pipeline"
+repository = "https://github.com/AngleSideAngle/data-pipeline"
 license = "MIT"
-keywords = ["data", "filtering", "streams"]
+keywords = ["data", "filtering", "streams", "lazy", "tree", "logging"]
 categories = ["mathematics", "data-structures", "algorithms", "science", "science::robotics"]
 
 [dependencies]
