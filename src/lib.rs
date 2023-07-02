@@ -1,4 +1,3 @@
-pub mod controllers;
 pub mod filter;
 pub mod junction;
 pub mod stream;
