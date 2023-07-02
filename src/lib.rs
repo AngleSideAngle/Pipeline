@@ -1,5 +1,6 @@
 pub mod controllers;
 pub mod filter;
+pub mod junction;
 pub mod stream;
 
 pub fn add(left: usize, right: usize) -> usize {
