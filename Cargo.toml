@@ -1,9 +1,14 @@
 [package]
 name = "pipeline"
 version = "0.1.0"
+authors = ["Asa Paparo <asapaparo@gmail.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "A functional and extensible library for organized processing of data with minimal overhead"
+readme = "README.md"
+repository = "https://github.com/AngleSideAngle/pipeline"
+license = "MIT"
+keywords = ["data", "filtering", "streams"]
+categories = ["mathematics", "data-structures", "algorithms", "science", "science::robotics"]
 
 [dependencies]
 dyn-clone = "1.0.11"
