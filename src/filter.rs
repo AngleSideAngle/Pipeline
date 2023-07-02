@@ -37,14 +37,14 @@ impl Mul<Stream> for f64 {
 
 #[derive(Debug, Clone)]
 pub struct Derivative {
-    last: Cell<f64>,
+    last: Cell<Option<f64>>,
     period: f64,
 }
 
 impl Derivative {
     pub fn new(period: f64) -> Self {
         Self {
-            last: Cell::default(),
+            last: Cell::new(None),
             period,
         }
     }
@@ -52,8 +52,8 @@ impl Derivative {
 
 impl Filter for Derivative {
     fn calculate(&self, input: f64) -> f64 {
-        let delta = input - self.last.get();
-        self.last.set(input);
+        let delta = input - self.last.get().unwrap_or(input);
+        self.last.set(Some(input));
         delta / self.period
     }
 }
