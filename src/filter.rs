@@ -2,7 +2,7 @@ use std::{cell::Cell, ops::Mul};
 
 use dyn_clone::DynClone;
 
-use super::stream::Stream;
+use crate::stream::Stream;
 
 pub trait Filter: DynClone {
     fn calculate(&self, input: f64) -> f64;

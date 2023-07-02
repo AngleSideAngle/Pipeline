@@ -1,15 +1,14 @@
 pub mod filter;
 pub mod junction;
 pub mod stream;
+pub mod supplier;
 
 #[cfg(test)]
 mod tests {
     use crate::stream::Stream;
 
-    use super::*;
-
     #[test]
-    fn intergation() {
+    fn integration() {
         let one = Stream::new(|| 1.0);
         let x = one.clone().integrate(Some(1.0));
         assert_eq!(x.get(), 1.0);

@@ -1,24 +1,22 @@
 use std::ops::{Add, Div, Mul, Sub};
 
-use super::{filter::Filter, junction::Junction};
-
-type Supplier = fn() -> f64;
+use crate::{filter::Filter, junction::Junction, supplier::Supplier};
 
 #[derive(Clone)]
 pub enum Stream {
-    Supplier(Supplier),
+    Supplier(Box<dyn Supplier>),
     Composite(Box<Self>, Box<dyn Filter>),
     Aggregate(Box<Self>, Box<Self>, Box<dyn Junction>),
 }
 
 impl Stream {
-    pub fn new(supplier: Supplier) -> Self {
-        Self::Supplier(supplier)
+    pub fn new(supplier: impl Supplier + 'static) -> Self {
+        Self::Supplier(Box::new(supplier))
     }
 
     pub fn get(&self) -> f64 {
         match self {
-            Self::Supplier(f) => f(),
+            Self::Supplier(supplier) => supplier.get(),
             Self::Composite(f, filter) => filter.calculate(f.get()),
             Self::Aggregate(f, g, junction) => junction.calculate(f.get(), g.get()),
         }
