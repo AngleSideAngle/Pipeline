@@ -5,8 +5,11 @@ use crate::stream::Stream;
 pub trait Supplier: DynClone {
     fn get(&self) -> f64;
 
-    fn stream(&'static self) -> Stream {
-        Stream::new(|| self.get())
+    fn stream(self) -> Stream
+    where
+        Self: Sized + 'static,
+    {
+        Stream::new(self)
     }
 }
 

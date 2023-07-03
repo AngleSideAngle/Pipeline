@@ -4,22 +4,14 @@ use crate::{filter::Filter, junction::Junction, supplier::Supplier};
 
 #[derive(Clone)]
 pub enum Stream {
-    Supplier(Box<dyn Supplier>),
+    Leaf(Box<dyn Supplier>),
     Composite(Box<Self>, Box<dyn Filter>),
     Aggregate(Box<Self>, Box<Self>, Box<dyn Junction>),
 }
 
 impl Stream {
     pub fn new(supplier: impl Supplier + 'static) -> Self {
-        Self::Supplier(Box::new(supplier))
-    }
-
-    pub fn get(&self) -> f64 {
-        match self {
-            Self::Supplier(supplier) => supplier.get(),
-            Self::Composite(f, filter) => filter.calculate(f.get()),
-            Self::Aggregate(f, g, junction) => junction.calculate(f.get(), g.get()),
-        }
+        Self::Leaf(Box::new(supplier))
     }
 
     pub fn map(self, op: impl Filter + 'static) -> Self {
@@ -28,6 +20,14 @@ impl Stream {
 
     pub fn combine(self, other: Stream, op: impl Junction + 'static) -> Self {
         Self::Aggregate(Box::new(self), Box::new(other), Box::new(op))
+    }
+
+    pub fn get(&self) -> f64 {
+        match self {
+            Self::Leaf(supplier) => supplier.get(),
+            Self::Composite(f, filter) => filter.calculate(f.get()),
+            Self::Aggregate(f, g, junction) => junction.calculate(f.get(), g.get()),
+        }
     }
 }
 

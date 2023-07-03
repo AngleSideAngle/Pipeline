@@ -5,7 +5,16 @@ pub mod supplier;
 
 #[cfg(test)]
 mod tests {
-    use crate::stream::Stream;
+    use crate::{stream::Stream, supplier::Supplier};
+
+    #[test]
+    fn creation() {
+        fn dummy() -> f64 {
+            2.0
+        }
+
+        let test = dummy.stream();
+    }
 
     #[test]
     fn integration() {
